@@ -1,8 +1,4 @@
-#Thanks for watching this coding video https://www.youtube.com/watch?v=bwNgyjQr6H4
-#Please do not forget to subscribe my youtube channel and like my videos, share them
-#This source code will be publish under below(including the music)
-#if you have any question you can comment below or contact me through every platform
-#Love you guys thanks :D https://github.com/pureforwhite/AudioVisualizer
+# Simple bar music visualizations
 
 import sys, math, wave, numpy, pygame
 from pygame.locals import *
