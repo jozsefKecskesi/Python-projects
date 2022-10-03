@@ -1,23 +1,25 @@
 # Simple bar music visualizations
-
+import random
 import sys, math, wave, numpy, pygame
 from pygame.locals import *
 from scipy.fftpack import dct
 
-Number = 30 # number of bars
-HEIGHT = 600 # HEIGHT of a bar
-WIDTH = 40 #WIDTH of a bar
-FPS = 10
+bars = 30 # No of bars
+height = 600 # height of a bar
+width = 40 # width of a bar
+fps = 10 # frame per sec
+
+
 
 file_name = sys.argv[0]
 status = 'stopped'
 fpsclock = pygame.time.Clock()
 
-#screen init, music playback
+# screen init, music playback
 
 pygame.init()
 pygame.mixer.init()
-screen = pygame.display.set_mode([Number * WIDTH, 50 + HEIGHT])
+screen = pygame.display.set_mode([bars * width, 50 + height])
 pygame.display.set_caption('Audio Visualizer')
 my_font = pygame.font.SysFont('consolas', 16)
 pygame.mixer.music.load("piano.wav")
@@ -41,8 +43,8 @@ num = nframes
 
 def Visualizer(nums):
     num = int(nums)
-    h = abs(dct(wave_data[0][nframes - num:nframes - num + Number]))
-    h = [min(HEIGHT, int(i**(1 / 2.5) * HEIGHT / 100)) for i in h]
+    h = abs(dct(wave_data[0][nframes - num:nframes - num + bars]))
+    h = [min(height, int(i**(1 / 2.5) * height / 100)) for i in h]
     draw_bars(h)
 
 def vis(status):
@@ -53,7 +55,7 @@ def vis(status):
     elif status == "paused":
         Visualizer(num)
     else:
-        num -= framerate / FPS
+        num -= framerate / fps
         if num > 0:
             Visualizer(num)
 
@@ -88,9 +90,12 @@ def controller(key):
 def draw_bars(h):
     bars = []
     for i in h:
-        bars.append([len(bars) * WIDTH , 50 + HEIGHT - i, WIDTH - 1, i])
+        bars.append([len(bars) * width , 50 + height - i, width - 1, i])
     for i in bars:
-        pygame.draw.rect(screen, [255,255,255], i, 0)
+        r = random.randint(0,255)
+        g = random.randint(0,255)
+        b = random.randint(0,255)
+        pygame.draw.rect(screen, [r,g,b], i, 0)
 
 while True:
     for event in pygame.event.get():
@@ -107,6 +112,6 @@ while True:
     screen.fill((0,0,0))
     screen.blit(name,(0,0))
     screen.blit(info,(0, 18))
-    fpsclock.tick(FPS)
+    fpsclock.tick(fps)
     vis(status)
     pygame.display.update()
