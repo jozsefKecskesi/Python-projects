@@ -1,6 +1,7 @@
 # Draw rounded patterns - refer to Python-projects/circlePatterns.png
 
 import turtle
+
 turtle.speed(0)
 turtle.bgcolor('black')
 
