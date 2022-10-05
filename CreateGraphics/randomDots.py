@@ -4,6 +4,7 @@ import turtle
 import random
 
 turtle.speed(0)
+turtle.penup() # Stop drawing lines
 turtle.bgcolor('black')
 
 paint = ['red', 'blue', 'orange', 'green', 'yellow', 'lightblue', 'white']
